@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>HTML5 AJAX Uploader</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+	<style>
+		.progress {
+			width:0%;
+			overflow:hidden;
+			height:40px;
+			display:inline-block;
+			vertical-align:middle;
+			color:#FFF;
+			text-align:right;
+			text-shadow:1px 1px 0 #000;
+			background:-o-linear-gradient(top,#888888,#333333);
+			background:-moz-linear-gradient(top,#888888,#333333);
+			background:-webkit-linear-gradient(top,#888888,#333333);
+			-o-transition-property:width;
+			-o-transition-duration:.5s;
+			-moz-transition-property:width;
+			-moz-transition-duration:.5s;
+			-webkit-transition-property:width;
+			-webkit-transition-duration:.5s;
+		}
+	</style>
+
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+	<script type="text/javascript" src="./uploader.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var $b = $('#upload'),
+				$f = $('#file'),
+				$p = $('#progress'),
+				up = new uploader($f.get(0), {
+					url:'/',
+					progress:function(ev){ console.log('progress'); $p.html(((ev.loaded/ev.total)*100)+'%'); $p.css('width',$p.html()); },
+					error:function(ev){ console.log('error'); },
+					success:function(data){ console.log('success'); $p.html('100%'); $p.css('width',$p.html()); }
+				});
+
+			$b.click(function(){
+				up.send();
+			});
+		});
+	</script>
+</head>
+<body>
+	<p>
+		<label for="file">Choose file</label>
+		<input type="file" id="file" name="file" accept="image/jpg, image/jpeg, image/gif, image/png" />
+	</p>
+	<p><button id="upload">Upload</button></p>
+	<p><span id="progress" class="progress">0%</span></p>
+</body>

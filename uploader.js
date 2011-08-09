@@ -23,12 +23,12 @@ function uploader(input, options) {
 			return false;
 		}
 		// Don't allow multiple file uploads if not specified
-		if($this.settings.multi === false && $this.input.files.length > 1) {
+		if($this.settings.multiple === false && $this.input.files.length > 1) {
 			if($this.settings.error) $this.settings.error('Can only upload one file at a time');
 			return false;
 		}
 		// Must determine whether to send one or all of the selected files
-		if($this.settings.multi) {
+		if($this.settings.multiple) {
 			$this.multiSend($this.input.files);
 		}
 		else {

@@ -75,7 +75,7 @@ function uploader(input, options) {
 	};
 
 	// Basic setup for the XHR stuff
-	if(this.settings.progress) this.xhr.upload.addEventListener('progress',this.settings.progress,false);
+	if(this.settings.onprogress) this.xhr.upload.addEventListener('progress',this.settings.onprogress,false);
 	this.xhr.onreadystatechange = function(ev){
 		if($this.xhr.readyState == 4) {
 			console.log('done!');
